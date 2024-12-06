@@ -1,0 +1,24 @@
+How many rounds do you want to play? 2
+
+Round 1
+The secret word is 5 letters long.
+You got it in 2 tries.
+Average: 2.00, minimum: 2, maximum: 2
+
+Round 2
+The secret word is 5 letters long.
+You got it in 1 tries.
+Average: 1.50, minimum: 1, maximum: 2
+
+
+How many rounds do you want to play? 2
+
+Round 1
+The secret word is 5 letters long.
+You got it in 2 tries.
+Average: 2.00, minimum: 2, maximum: 2
+
+Round 2
+The secret word is 5 letters long.
+You got it in 1 try.
+Average: 1.50, minimum: 1, maximum: 2

@@ -1,0 +1,11 @@
+{
+    "C_Cpp.codeAnalysis.clangTidy.checks.disabled": [
+        "clang-diagnostic-unused-value"
+    ],
+    "files.associations": {
+        "iomanip": "cpp",
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "istream": "cpp"
+    }
+}

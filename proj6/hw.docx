@@ -1,0 +1,178 @@
+1. 
+    a. 
+        int main()
+        {
+            int arr[3] = { 5, 10, 15 };
+            int* ptr = arr;
+
+            *ptr = 30;          // set arr[0] to 30
+            *(ptr + 1) = 20;      // set arr[1] to 20
+            ptr += 2;
+            *ptr = 10;        // set arr[2] to 10
+
+            ptr = arr;
+            while (ptr != arr + 3)
+            {
+                cout << *ptr << endl;    // print values
+                ptr++;
+            }
+        }
+    b.
+        In cpp, a pointer passed into a funciton is passed by copy, thus any movement of the pointer has no effect 
+        on the original pointer in main(). To fix this, simply pass in the pointer by reference so that when the 
+        pointer is changed within the function, the original pointer in main is also changed.
+
+            void findMax(int arr[], int n, int*& pToMax)
+                {
+                    if (n <= 0) 
+                        return;      // no items, no maximum!
+
+                    pToMax = arr;
+
+
+                    for (int i = 1; i < n; i++)
+                    {
+                        if (arr[i] > *pToMax)
+                            pToMax = arr + i;
+                    }
+                }       
+
+                int main()
+                {
+                    int nums[4] = { 5, 3, 15, 6 };
+                    int* ptr = &nums[0];
+
+                    findMax(nums, 4, ptr);
+                    cout << "The maximum is at address " << ptr << endl;
+                    cout << "It's at position " << ptr - nums << endl;
+                    cout << "Its value is " << *ptr << endl;
+                }
+    c.
+        In main, the pointer is not intialized to any specific place in memory when computeCube is called. Thus
+        n^3 is stored in a random location, leading too undefined behavior when that pointer is followed. To fix this,
+        define an int variable for the pointer to be intialized to so that the specific place in memory the n^3 is stored
+        is specified.
+        
+            void computeCube(int n, int* ncubed)
+                {
+                    *ncubed = n * n * n;
+                }
+
+                int main()
+                {
+                    int cube;
+                    int* ptr = &cube;
+                    computeCube(5, ptr);
+                    cout << "Five cubed is " << *ptr << endl;
+                }
+    d.
+        In the while loop condition, the pointers are being compared to the 0 byte instead of the char at the location
+        the pointers are pointing at. Additionally, the pointer locations are being compared in the if statement, not
+        the characters. Finally, to check if both ended at the same time, the comparison also needs to be if both are 
+        the null char, so the pointers also need to be dereferenced
+
+              // return true if two C strings are equal
+            bool strequal(const char str1[], const char str2[])
+            {
+                while (*str1 != 0  &&  *str2 != 0)  // zero bytes at ends
+                {
+                    if (*str1 != *str2)  // compare corresponding characters
+                        return false;
+                    str1++;            // advance to the next character
+                    str2++;
+                }
+                return *str1 == *str2;   // both ended at same time?
+            }
+
+            int main()
+            {
+                char a[15] = "Alex H.";
+                char b[15] = "Alex T.";
+
+                if (strequal(a,b))
+                    cout << "They're the same person!\n";
+            }
+    e.
+        In getPtrToArray, the array is intialized in the function, thus after the code leaves the function
+        the array is deleted. Then, the pointer pointing to the array is pointing towards nothing, thus when 
+        it is followed, it is undefined behavior and random numbers are returned.
+    
+2. 
+    double* cat;
+    double mouse[5];
+    cat = mouse + 4;
+    *cat = 25;
+    *(mouse + 3) = 42;
+    cat -= 3;
+    cat[1] = 17;
+    cat[0] = 54;
+    bool d = (cat == mouse);
+    bool b = (*cat == *(cat + 1));
+
+3. 
+   a. 
+        double mean(const double* scores, int numScores)
+        {
+            double tot = 0;
+            for(int i = 0; i < numScores; i++){
+                tot += *(scores + i);
+            }
+            return tot/numScores;
+        }
+    b.
+        // This function searches through str for the character chr.
+        // If the chr is found, it returns a pointer into str where
+        // the character was first found, otherwise nullptr (not found).
+
+        const char* findTheChar(const char str[], char chr)
+        {
+            for (int k = 0; *(str + k) != 0; k++)
+                if (*(str + k) == chr)
+                    return str + k; 
+
+            return nullptr;
+        }
+4. 
+    [5,3,4,17,22,19]
+     ^
+    [-1,3,4,17,22,19]
+     ^
+    [-1,3,4,17,22,19]
+          ^ 
+    [-1,3,4,9,22,19]
+          ^
+    [-1,79,4,9,22,19]
+           ^
+    output: 
+        3  // &array[5] = array + 5, ptr = array + 2, (array + 5) - (array + 2) = 3
+    [-1,79,4,9,22,19] // nothing is done, only pointers are moved around
+    [4,79,-1,9,22,19] //index 0 and 2 switch values
+    output: 
+        4
+        79
+        -1
+        9
+        22
+        19
+    
+    final output:
+        3
+        4
+        79
+        -1
+        9
+        22
+        19
+5.
+    void removeS(char* ptr){
+        char* output = ptr;
+
+        while(*ptr != 0){
+            if(*ptr != 's' && *ptr != 'S'){
+                *output = *ptr;
+                output++;
+            }
+            ptr++; 
+        }
+        *output = 0;
+    }
