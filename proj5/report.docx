@@ -1,0 +1,37 @@
+Notable Obstacles:
+    Initially setting the enviornment for multifile cpp projects took some time, working in VSCode it wasn't that straight forward
+
+    Testing the code was also a challenge. Due to the nature of the program, there was no easy/straight-forward way to test the full program,
+    the best way I found to do it was to build the program slowly, testing each individual part.
+
+    The centeral aspect of the program, counting stars and planets, was also decently difficult. Keeping track of the index and comparisons was not easy.
+
+Design:
+    runOneRound()
+        check validity of inputs -> if nWords and wordNum have correct values
+        while word not correct:
+            get user input
+            check validity of user input
+            check if word is correct
+                if correct return number of tries
+            count stars
+                loop through both strings
+                    add stars and remove char at index if chars are the same
+            count planets  
+                loop through trialWord
+                    loop through word
+                        if char is trialword is found in word 
+                            remove both and move on to next char in trial word
+    
+    main()
+        Get word array
+        check if number of words is less than 1
+        get number of rounds
+        check if number of rounds is positive
+        init variables max, min, and average
+        looping for each rounds
+            run runOneRound
+            update max min and average based off output
+            
+        
+

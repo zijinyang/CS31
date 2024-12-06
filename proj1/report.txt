@@ -1,0 +1,21 @@
+Input into original.cpp for bad output:
+    How many registered voters were surveyed? 1
+    How many of them say they will probably vote for Trarris? 20
+    How many of them say they will probably vote for Hump? -1
+
+    2000.0% say they will probably vote for Trarris.
+    -100.0% say they will probably vote for Hump.
+    Trarris is predicted to win the election.
+
+    With only 1 voter total, it is nonsensical to say that 20 voters will vote for Trarris (as there was only 1 voter to begin with). 
+    Addtionally, it is also nonsensical to say that a negative number of people voted for Hump.
+    Thus, the results 2000% and -100% are both unreasonable, from the nonsensical inputs given to the program.
+
+Error introduced into logic_error.cpp:
+    calculation for percentage of votes were changed. 
+    For Trarris, rather than dividing by numberServeyed, it was multiplied.
+    For Hump, rather than multiplying forHump by 100, the numerator was set as 100/forHump.
+
+Error introduced into compile_error.cpp:
+    For pctTrarris and pctHump, the type was changed from a double to a string. This resulted in an error type casting error.
+    For the console out, the operand on the ostream was changed to the wrong direction, resulting in an error of an invalide operand.
